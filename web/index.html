@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workplace Health Research Study | Multi-Disciplinary Clinical Analysis (N=286)</title>
+  <meta name="description" content="Comprehensive de-identified epidemiological and clinical research analysis of the 286-patient health camp cohort across cardiometabolic, hematology, hepatology, and renal profiles.">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Chart.js for data visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="brand">
+        <div class="brand-icon">✚</div>
+        <div>
+          <div class="brand-title">CLINICAL HEALTH RESEARCH LAB</div>
+          <div class="brand-subtitle">Anonymized Workplace Health Cohort (N = 286)</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><button class="nav-link-btn active" data-target="section-overview">Executive Summary</button></li>
+        <li><button class="nav-link-btn" data-target="section-specialists">Medical Research Board</button></li>
+        <li><button class="nav-link-btn" data-target="section-analytics">Biochemical Charts</button></li>
+        <li><button class="nav-link-btn" data-target="section-explorer">Cohort Explorer (286)</button></li>
+        <li><button class="nav-link-btn" data-target="section-actionplan">Clinical Action Plan</button></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Summary Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-meta-badge">🏥 Multi-Disciplinary Medical Board Investigation</div>
+      <h1 class="hero-title">Occupational Health & Metabolic Biomarker Profiling</h1>
+      <p class="hero-description">
+        Comprehensive health assessment of 286 warehouse and delivery workforce members. Emulating a medical board across Epidemiology, Cardiometabolic Medicine, Hematology, Hepatology, and Nephrology. Fully de-identified research dataset.
+      </p>
+
+      <!-- Key Stat Cards -->
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-header">Cohort Size <span>Total</span></div>
+          <div class="stat-value">286</div>
+          <div class="stat-desc">85.7% Male (245) &bull; 14.3% Female (41)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">Median Workforce Age <span>Demographic</span></div>
+          <div class="stat-value">26 <span style="font-size: 1.1rem; font-weight: 500;">yrs</span></div>
+          <div class="stat-desc"><span class="stat-tag-info">69.6% under 30 yrs</span> (Young Active Cohort)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">Female Anemia Rate <span class="stat-tag-danger">CRITICAL</span></div>
+          <div class="stat-value" style="color: var(--danger);">80.5%</div>
+          <div class="stat-desc"><span class="stat-tag-danger">33 of 41 women</span> show low Hb (&lt;12.0 g/dL)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">Suboptimal HDL Cholesterol <span class="stat-tag-warning">HIGH</span></div>
+          <div class="stat-value" style="color: var(--warning);">42.3%</div>
+          <div class="stat-desc">120 individuals have protective HDL &lt;40 mg/dL</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">Hypertriglyceridemia <span>Metabolic</span></div>
+          <div class="stat-value">40.1%</div>
+          <div class="stat-desc">114 individuals have Triglycerides &gt;150 mg/dL</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">Elevated ALT / SGPT <span>Hepatic</span></div>
+          <div class="stat-value">25.3%</div>
+          <div class="stat-desc">72 patients with liver transaminase elevation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Multi-Tab View -->
+  <main class="container">
+
+    <!-- 1. Executive Summary -->
+    <div id="section-overview" class="section-container active">
+      <div class="section-header">
+        <h2 class="section-title">Executive Clinical Overview</h2>
+        <p class="section-subtitle">Key findings synthesized from comprehensive laboratory reports covering 286 subjects.</p>
+      </div>
+
+      <div class="doctor-panel">
+        <div class="doctor-profile">
+          <div class="doctor-avatar">EP</div>
+          <div class="doctor-name">Epidemiology & Public Health Division</div>
+          <div class="doctor-role">Preventive Medicine & Occupational Health</div>
+          <p class="doctor-credentials">Specializes in occupational cohort epidemiology and non-communicable disease (NCD) surveillance.</p>
+        </div>
+        <div class="doctor-findings">
+          <div class="finding-item alert-warning">
+            <div class="finding-title">
+              1. The "Atherogenic Triad" in Young Urban Workers
+              <span class="finding-badge badge-warning">40.1% High TG</span>
+            </div>
+            <div class="finding-body">
+              Despite an overwhelmingly young median age of 26 years, over 40% of the cohort exhibits elevated triglycerides, paired with 42.3% suffering from low protective HDL-C. This high TG / low HDL ratio indicates high carbohydrate/refined oil intake, sedentary shifts, and early cardiometabolic stress.
+            </div>
+          </div>
+
+          <div class="finding-item alert-danger">
+            <div class="finding-title">
+              2. Stark Female Nutritional Vulnerability (80.5% Anemia)
+              <span class="finding-badge badge-danger">Urgent Intervention</span>
+            </div>
+            <div class="finding-body">
+              80.5% of women in the camp presented with hemoglobin below the clinical threshold (12.0 g/dL), with low MCV and low MCH indicating predominantly microcytic hypochromic iron deficiency anemia. Immediate workplace nutritional screening and iron/folate supplementation are strongly advised.
+            </div>
+          </div>
+
+          <div class="finding-item">
+            <div class="finding-title">
+              3. Silent Hepatic Transaminase Spikes (25.3% Elevated ALT)
+              <span class="finding-badge badge-warning">Hepatocellular Risk</span>
+            </div>
+            <div class="finding-body">
+              One in four individuals had elevated ALT/SGPT (&gt;49 U/L), which, when cross-correlated with hypertriglyceridemia, points toward metabolic dysfunction-associated steatotic liver disease (MASLD / NAFLD) in early asymptomatic stages.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Specialist Doctors Panel -->
+    <div id="section-specialists" class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Medical Specialist Board Findings</h2>
+        <p class="section-subtitle">Deep dive clinical evaluations across five medical disciplines.</p>
+      </div>
+
+      <!-- Cardiometabolic -->
+      <div class="doctor-panel">
+        <div class="doctor-profile">
+          <div class="doctor-avatar">CM</div>
+          <div class="doctor-name">Cardiometabolic & Endocrinology Panel</div>
+          <div class="doctor-role">Lipidology & Glycemic Regulation</div>
+          <p class="doctor-credentials">Focused on premature coronary artery disease prevention and glycemic dysregulation screening.</p>
+        </div>
+        <div class="doctor-findings">
+          <div class="finding-item">
+            <div class="finding-title">Lipid Profile & Atherogenic Dyslipidemia Evaluation</div>
+            <div class="finding-body">
+              Total cholesterol elevation (&gt;200 mg/dL) was present in 6.0% (17 subjects), but <strong>atherogenic dyslipidemia</strong> (Triglycerides &gt;150 + HDL &lt;40) was identified in <strong>57 subjects (20.0%)</strong>. 
+              Elevated Triglyceride-to-HDL ratio is one of the strongest independent surrogate markers for insulin resistance and small dense LDL particles in South Asian populations.
+            </div>
+          </div>
+          <div class="finding-item">
+            <div class="finding-title">Glycemic Control (HbA1c & Fasting Glucose)</div>
+            <div class="finding-body">
+              98.3% of the cohort was screened for HbA1c. <strong>11 individuals (3.9%)</strong> demonstrated prediabetic or diabetic HbA1c (&gt;5.7%), with peak HbA1c reaching 9.60%. Because the cohort is young, early lifestyle correction can achieve complete remission in this prediabetic segment.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hematologist -->
+      <div class="doctor-panel">
+        <div class="doctor-profile">
+          <div class="doctor-avatar">HM</div>
+          <div class="doctor-name">Hematology & Transfusion Medicine Panel</div>
+          <div class="doctor-role">Red Cell Disorders & Inflammatory Biomarkers</div>
+          <p class="doctor-credentials">Expertise in red cell disorders, hemoglobinopathies, and occupational hemograms.</p>
+        </div>
+        <div class="doctor-findings">
+          <div class="finding-item alert-danger">
+            <div class="finding-title">Severe Microcytic Anemia Clustering</div>
+            <div class="finding-body">
+              Overall anemia rate across the cohort is 23.8% (67/281 tested). Crucially, 33/41 females (80.5%) and 34/245 males (13.9%) are affected. Mentzer index (&gt;13) and Green & King index (&gt;65) across 33 subjects confirm iron-deficiency microcytic anemia rather than beta-thalassemia trait.
+            </div>
+          </div>
+          <div class="finding-item alert-warning">
+            <div class="finding-title">Systemic Inflammatory Response (ESR Elevation)</div>
+            <div class="finding-body">
+              <strong>79 subjects (28.1%)</strong> exhibited elevated Erythrocyte Sedimentation Rate (ESR &gt;12 mm/1st hr), correlating with subclinical musculoskeletal strain, chronic low-grade inflammation, and underlying infections.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hepatology -->
+      <div class="doctor-panel">
+        <div class="doctor-profile">
+          <div class="doctor-avatar">HP</div>
+          <div class="doctor-name">Hepatology & Gastroenterology Panel</div>
+          <div class="doctor-role">Hepatic Steatosis & Transaminase Surveillance</div>
+          <p class="doctor-credentials">Specializes in metabolic fatty liver, viral hepatitis, and hepatocellular health.</p>
+        </div>
+        <div class="doctor-findings">
+          <div class="finding-item alert-warning">
+            <div class="finding-title">Hepatic Transaminasemia (ALT/AST Elevation)</div>
+            <div class="finding-body">
+              72 subjects (25.3%) have elevated SGPT/ALT, and 98 (34.4%) have elevated SGOT/AST. The AST/SGPT ratio in most elevated subjects remains below 1.0, typical of non-alcoholic metabolic fatty liver rather than alcoholic hepatitis.
+            </div>
+          </div>
+          <div class="finding-item">
+            <div class="finding-title">Biliary Markers & Protein Synthesis</div>
+            <div class="finding-body">
+              Serum Bilirubin and Alkaline Phosphatase (ALP) were generally well-preserved. Serum Albumin was normal in &gt;98% of subjects, demonstrating preserved synthetic liver function.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nephrology -->
+      <div class="doctor-panel">
+        <div class="doctor-profile">
+          <div class="doctor-avatar">NP</div>
+          <div class="doctor-name">Nephrology & Clinical Biochemistry Panel</div>
+          <div class="doctor-role">Renal Clearance & Endocrine Regulation</div>
+          <p class="doctor-credentials">Clinical Biochemistry & Renal Physiology evaluation.</p>
+        </div>
+        <div class="doctor-findings">
+          <div class="finding-item">
+            <div class="finding-title">Renal Function & Filtration Integrity (eGFR)</div>
+            <div class="finding-body">
+              Serum creatinine was normal in 98.6% of subjects (281/285). Mean estimated GFR exceeds 105 mL/min/1.73m², reflecting healthy baseline renal parenchyma in this young cohort. Only 4 subjects exhibited elevated creatinine requiring hydration and repeat testing.
+            </div>
+          </div>
+          <div class="finding-item">
+            <div class="finding-title">Hyperuricemia & Thyroid Health (TSH)</div>
+            <div class="finding-body">
+              13 subjects (4.6%) presented with hyperuricemia (Uric Acid &gt;7.2 mg/dL in males), putting them at risk for gouty arthritis. 23 subjects (8.1%) showed elevated TSH (&gt;4.78 µIU/ml), representing subclinical hypothyroidism that warrants FT4 correlation.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Biochemical & Epidemiological Charts -->
+    <div id="section-analytics" class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Visual Cohort Analytics</h2>
+        <p class="section-subtitle">Interactive distributions across key organ systems.</p>
+      </div>
+
+      <div class="charts-grid">
+        <!-- Age & Gender -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div>
+              <div class="chart-title">Cohort Age Distribution</div>
+              <div class="chart-subtitle">Breakdown by 10-year age brackets</div>
+            </div>
+          </div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="chart-age"></canvas>
+          </div>
+        </div>
+
+        <!-- Lipid Breakdown -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div>
+              <div class="chart-title">Lipid Risk Profiles</div>
+              <div class="chart-subtitle">Prevalence of Triglyceride, HDL, and LDL abnormalities</div>
+            </div>
+          </div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="chart-lipid"></canvas>
+          </div>
+        </div>
+
+        <!-- Anemia by Gender -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div>
+              <div class="chart-title">Anemia Prevalence by Gender</div>
+              <div class="chart-subtitle">Hemoglobin &lt;12.0 (F) vs &lt;13.0 (M)</div>
+            </div>
+          </div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="chart-anemia"></canvas>
+          </div>
+        </div>
+
+        <!-- Organ Risk Distribution -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div>
+              <div class="chart-title">Organ System Risk Matrix</div>
+              <div class="chart-subtitle">Percentage of subjects flagged per organ system</div>
+            </div>
+          </div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="chart-organ"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Interactive Cohort Explorer -->
+    <div id="section-explorer" class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Interactive Cohort Explorer</h2>
+        <p class="section-subtitle">Inspect individual lab results, flags, and reference ranges for all 286 de-identified subjects.</p>
+      </div>
+
+      <div class="explorer-controls">
+        <div class="search-wrapper">
+          <input type="text" id="patient-search-input" class="search-input" placeholder="Search by Subject ID, Order ID, or Barcode...">
+        </div>
+        <div class="filter-group">
+          <select id="filter-gender" class="filter-select">
+            <option value="all">All Genders</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <select id="filter-risk" class="filter-select">
+            <option value="all">All Risk Flags</option>
+            <option value="Anemia">Anemia</option>
+            <option value="Cardiovascular / Lipid">Cardio / Lipid Risk</option>
+            <option value="Hepatic / Liver">Elevated Liver Enzymes</option>
+            <option value="Hyperglycemia / Diabetic">Glycemic Risk (HbA1c)</option>
+            <option value="Thyroid Elevation">Thyroid Elevation (TSH)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="clinical-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Order ID</th>
+              <th>Subject ID</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>HbA1c</th>
+              <th>Cholesterol</th>
+              <th>Triglycerides</th>
+              <th>SGPT (ALT)</th>
+              <th>Creatinine</th>
+              <th>TSH</th>
+              <th>Hemoglobin</th>
+              <th>Out of Range</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="patient-table-body">
+            <!-- Dynamic rows rendered by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination-wrapper">
+        <div id="pagination-info" style="font-size: 0.88rem; color: var(--text-secondary);">Showing 1-25 of 286 subjects</div>
+        <div style="display: flex; gap: 8px;">
+          <button id="btn-prev-page" class="page-btn" disabled>Previous</button>
+          <button id="btn-next-page" class="page-btn">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Clinical Action Plan -->
+    <div id="section-actionplan" class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Clinical Action Plan & Workplace Health Protocol</h2>
+        <p class="section-subtitle">Targeted public health interventions and follow-up clinical pathways.</p>
+      </div>
+
+      <div class="rec-grid">
+        <!-- Female Anemia Protocol -->
+        <div class="rec-card">
+          <span class="rec-badge badge-danger">Priority 1 &bull; Women's Health</span>
+          <h3 class="rec-title">Workplace Anemia Remediation Program</h3>
+          <ul class="rec-list">
+            <li><strong>Therapeutic Iron & Folate:</strong> Initiate supervised oral iron therapy (Ferrous Ascorbate / Bisglycinate + Folate) for the 33 anemic female employees.</li>
+            <li><strong>Nutritional Enrichment:</strong> Introduce iron-fortified snacks and dietary counseling on vitamin C co-ingestion to maximize bioavailability.</li>
+            <li><strong>60-Day Retest Protocol:</strong> Schedule repeat CBC hemograms in 60-90 days to verify hemoglobin recovery.</li>
+          </ul>
+        </div>
+
+        <!-- Cardiometabolic Protocol -->
+        <div class="rec-card">
+          <span class="rec-badge badge-warning">Priority 2 &bull; Metabolic Health</span>
+          <h3 class="rec-title">Triglyceride & Lipid Optimization Initiative</h3>
+          <ul class="rec-list">
+            <li><strong>Dietary Re-engineering:</strong> Curtail refined carbohydrates, high-fructose beverages, and deep-fried foods during workplace meal breaks.</li>
+            <li><strong>Physical Activity Boost:</strong> Introduce structured cardiovascular conditioning to raise protective HDL-C levels.</li>
+            <li><strong>Secondary Screening:</strong> Fasting lipid profiles and Apo-B evaluations for individuals with TG/HDL &gt; 3.5.</li>
+          </ul>
+        </div>
+
+        <!-- Hepatic Health Protocol -->
+        <div class="rec-card">
+          <span class="rec-badge badge-warning">Priority 3 &bull; Liver Surveillance</span>
+          <h3 class="rec-title">Metabolic Liver Disease (MASLD) Protocol</h3>
+          <ul class="rec-list">
+            <li><strong>Ultrasound Screening:</strong> Recommend upper abdominal ultrasound for the 72 subjects with persistent ALT &gt;49 U/L to assess hepatic steatosis.</li>
+            <li><strong>Hydration & Alcohol Avoidance:</strong> Occupational hydration stations and employee awareness on minimizing hepatotoxic substances and over-the-counter analgesics.</li>
+          </ul>
+        </div>
+
+        <!-- Thyroid & Endocrine Follow-up -->
+        <div class="rec-card">
+          <span class="rec-badge badge-success">Priority 4 &bull; Endocrine Care</span>
+          <h3 class="rec-title">Thyroid & Glycemic Management</h3>
+          <ul class="rec-list">
+            <li><strong>TSH & Free T4 Confirmation:</strong> Clinical evaluation and repeat morning TSH testing for the 23 subjects with elevated TSH.</li>
+            <li><strong>Diabetes Lifestyle Intervention:</strong> Tailored nutritional coaching for the 11 individuals with elevated HbA1c (&gt;5.7%).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Patient Inspector Modal -->
+  <div id="patient-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <h3 id="modal-patient-name" class="modal-title">Subject Report</h3>
+          <div id="modal-order-id" style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono);"></div>
+        </div>
+        <button id="modal-close-btn" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-patient-info">
+          <div>
+            <div class="info-field-label">Age & Gender</div>
+            <div id="modal-age-gender" class="info-field-val"></div>
+          </div>
+          <div>
+            <div class="info-field-label">Study Barcode</div>
+            <div id="modal-barcode" class="info-field-val"></div>
+          </div>
+          <div>
+            <div class="info-field-label">Camp Date</div>
+            <div id="modal-collected" class="info-field-val"></div>
+          </div>
+          <div>
+            <div class="info-field-label">Archive Status</div>
+            <div style="color: var(--success); font-weight: 600; font-size: 0.85rem;">De-identified &bull; Verified</div>
+          </div>
+        </div>
+
+        <h4 style="font-size: 1rem; margin-bottom: 12px; color: var(--text-primary);">Complete Biochemical & Hematological Panel</h4>
+        <div id="modal-tests-container" class="modal-test-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

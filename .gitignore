@@ -1,0 +1,12 @@
+# Ignore raw source reports with external links and address names
+*Camp Report*.csv
+downloaded_reports/
+*.pdf
+
+# Python artifacts
+__pycache__/
+*.pyc
+
+# OS / Office metadata
+.DS_Store
+~$*
