@@ -1,4 +1,4 @@
-// Clinical Health Research Web Application Logic
+// Literary Clinical Medical Research Portal JavaScript Logic
 
 let currentPage = 1;
 const pageSize = 25;
@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Navigation Handling
 function initNavigation() {
-  const navBtns = document.querySelectorAll('.nav-link-btn');
-  const sections = document.querySelectorAll('.section-container');
+  const navBtns = document.querySelectorAll('.nav-item-btn');
+  const sections = document.querySelectorAll('.chapter-section');
 
   navBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -27,12 +27,13 @@ function initNavigation() {
       const targetSection = document.getElementById(targetId);
       if (targetSection) {
         targetSection.classList.add('active');
+        window.scrollTo({ top: targetSection.offsetTop - 100, behavior: 'smooth' });
       }
     });
   });
 }
 
-// Chart Initializations using Chart.js
+// Chart Initializations
 function initCharts() {
   if (typeof Chart === 'undefined') return;
 
@@ -44,10 +45,10 @@ function initCharts() {
       data: {
         labels: ['< 20 yrs', '20 - 29 yrs', '30 - 39 yrs', '40 - 49 yrs', '50+ yrs'],
         datasets: [{
-          label: 'Number of Patients',
+          label: 'Number of Screened Employees',
           data: [24, 175, 61, 17, 9],
-          backgroundColor: '#0284c7',
-          borderRadius: 6,
+          backgroundColor: '#0f2d59',
+          borderRadius: 4,
         }]
       },
       options: {
@@ -57,7 +58,7 @@ function initCharts() {
           legend: { display: false }
         },
         scales: {
-          y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+          y: { beginAtZero: true, grid: { color: '#f1f5f9' }, title: { display: true, text: 'Subject Count' } },
           x: { grid: { display: false } }
         }
       }
@@ -70,10 +71,10 @@ function initCharts() {
     new Chart(ctxLipid, {
       type: 'doughnut',
       data: {
-        labels: ['Normal Lipids', 'Low HDL (<40)', 'High Triglycerides (>150)', 'Both (High TG + Low HDL)'],
+        labels: ['Normal Lipids (33.5%)', 'Isolated Low HDL (22.2%)', 'Isolated High TG (20.1%)', 'Both High TG + Low HDL (20.0%)'],
         datasets: [{
           data: [95, 63, 57, 57],
-          backgroundColor: ['#10b981', '#f59e0b', '#f97316', '#ef4444'],
+          backgroundColor: ['#047857', '#b45309', '#ea580c', '#be123c'],
           borderWidth: 2,
           borderColor: '#ffffff'
         }]
@@ -82,7 +83,7 @@ function initCharts() {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12 } }
+          legend: { position: 'bottom', labels: { boxWidth: 12, padding: 14 } }
         }
       }
     });
@@ -94,19 +95,19 @@ function initCharts() {
     new Chart(ctxAnemia, {
       type: 'bar',
       data: {
-        labels: ['Female Cohort (N=41)', 'Male Cohort (N=245)'],
+        labels: ['Female Cohort (N = 41)', 'Male Cohort (N = 245)'],
         datasets: [
           {
-            label: 'Normal Hb',
+            label: 'Normal Hemoglobin',
             data: [8, 211],
-            backgroundColor: '#10b981',
-            borderRadius: 6
+            backgroundColor: '#047857',
+            borderRadius: 4
           },
           {
-            label: 'Anemic (Low Hb)',
+            label: 'Anemic (Hb < Reference Threshold)',
             data: [33, 34],
-            backgroundColor: '#e11d48',
-            borderRadius: 6
+            backgroundColor: '#be123c',
+            borderRadius: 4
           }
         ]
       },
@@ -115,7 +116,7 @@ function initCharts() {
         maintainAspectRatio: false,
         scales: {
           x: { stacked: true, grid: { display: false } },
-          y: { stacked: true, beginAtZero: true, grid: { color: '#f1f5f9' } }
+          y: { stacked: true, beginAtZero: true, grid: { color: '#f1f5f9' }, title: { display: true, text: 'Number of Individuals' } }
         },
         plugins: {
           legend: { position: 'bottom', labels: { boxWidth: 12 } }
@@ -130,16 +131,16 @@ function initCharts() {
     new Chart(ctxOrgan, {
       type: 'polarArea',
       data: {
-        labels: ['Lipid / Cardio (48.9%)', 'ESR Inflammation (28.1%)', 'Anemia (23.8%)', 'Liver / ALT (25.3%)', 'Thyroid TSH (8.1%)', 'Renal Creatinine (1.4%)'],
+        labels: ['Lipid Dysregulation (48.9%)', 'ESR Inflammation (28.1%)', 'Elevated ALT / Liver (25.3%)', 'Anemia (23.8%)', 'Elevated TSH (8.1%)', 'Elevated Creatinine (1.4%)'],
         datasets: [{
-          data: [48.9, 28.1, 23.8, 25.3, 8.1, 1.4],
+          data: [48.9, 28.1, 25.3, 23.8, 8.1, 1.4],
           backgroundColor: [
-            'rgba(245, 158, 11, 0.7)',
-            'rgba(239, 68, 68, 0.7)',
-            'rgba(225, 29, 72, 0.7)',
-            'rgba(14, 165, 233, 0.7)',
-            'rgba(168, 85, 247, 0.7)',
-            'rgba(100, 116, 139, 0.7)'
+            'rgba(180, 83, 9, 0.75)',
+            'rgba(190, 18, 60, 0.75)',
+            'rgba(8, 127, 140, 0.75)',
+            'rgba(225, 29, 72, 0.75)',
+            'rgba(100, 116, 139, 0.75)',
+            'rgba(15, 45, 89, 0.75)'
           ],
           borderWidth: 1
         }]
@@ -155,7 +156,7 @@ function initCharts() {
   }
 }
 
-// Cohort Explorer, Search, Filtering & Pagination
+// Cohort Explorer
 function initExplorer() {
   if (typeof HEALTH_DATA === 'undefined') return;
 
@@ -179,7 +180,6 @@ function initExplorer() {
         p.barcode.toLowerCase().includes(query);
       
       const matchGender = gender === 'all' || p.gender.toLowerCase() === gender.toLowerCase();
-      
       const matchRisk = risk === 'all' || p.risk_flags.includes(risk);
 
       return matchSearch && matchGender && matchRisk;
@@ -189,24 +189,28 @@ function initExplorer() {
     renderTable();
   }
 
-  searchInput.addEventListener('input', applyFilters);
-  genderFilter.addEventListener('change', applyFilters);
-  riskFilter.addEventListener('change', applyFilters);
+  if (searchInput) searchInput.addEventListener('input', applyFilters);
+  if (genderFilter) genderFilter.addEventListener('change', applyFilters);
+  if (riskFilter) riskFilter.addEventListener('change', applyFilters);
 
-  prevBtn.addEventListener('click', () => {
-    if (currentPage > 1) {
-      currentPage--;
-      renderTable();
-    }
-  });
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable();
+      }
+    });
+  }
 
-  nextBtn.addEventListener('click', () => {
-    const totalPages = Math.ceil(filteredPatients.length / pageSize);
-    if (currentPage < totalPages) {
-      currentPage++;
-      renderTable();
-    }
-  });
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      const totalPages = Math.ceil(filteredPatients.length / pageSize);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTable();
+      }
+    });
+  }
 
   renderTable();
 }
@@ -217,6 +221,8 @@ function renderTable() {
   const prevBtn = document.getElementById('btn-prev-page');
   const nextBtn = document.getElementById('btn-next-page');
 
+  if (!tbody) return;
+
   tbody.innerHTML = '';
 
   const total = filteredPatients.length;
@@ -225,17 +231,18 @@ function renderTable() {
   const end = Math.min(start + pageSize, total);
   const pageData = filteredPatients.slice(start, end);
 
-  paginationInfo.textContent = total > 0 
-    ? `Showing ${start + 1}-${end} of ${total} patients`
-    : 'No patients found';
+  if (paginationInfo) {
+    paginationInfo.textContent = total > 0 
+      ? `Showing ${start + 1}-${end} of ${total} subjects`
+      : 'No matching subjects found';
+  }
 
-  prevBtn.disabled = currentPage === 1;
-  nextBtn.disabled = currentPage >= totalPages;
+  if (prevBtn) prevBtn.disabled = currentPage === 1;
+  if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
 
   pageData.forEach(p => {
     const tr = document.createElement('tr');
     
-    // Helpers to highlight cells
     const hba1c = p.tests['HbA1c (%)'] || '-';
     const isHba1cHigh = parseFloat(hba1c) >= 5.7;
 
@@ -260,60 +267,59 @@ function renderTable() {
 
     tr.innerHTML = `
       <td>${p.id}</td>
-      <td class="id-cell">${p.order_id}</td>
-      <td><strong>${escapeHtml(p.name)}</strong></td>
+      <td style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--navy-primary);">${p.order_id}</td>
+      <td><strong>${p.name}</strong></td>
       <td>${p.age || '-'}</td>
       <td>${p.gender}</td>
-      <td style="${isHba1cHigh ? 'color: var(--danger); font-weight: 700;' : ''}">${hba1c}</td>
-      <td style="${isCholHigh ? 'color: var(--warning); font-weight: 700;' : ''}">${chol}</td>
-      <td style="${isTgHigh ? 'color: var(--danger); font-weight: 700;' : ''}">${tg}</td>
-      <td style="${isAltHigh ? 'color: var(--warning); font-weight: 700;' : ''}">${alt}</td>
-      <td style="${isCreatHigh ? 'color: var(--danger); font-weight: 700;' : ''}">${creat}</td>
-      <td style="${isTshHigh ? 'color: var(--warning); font-weight: 700;' : ''}">${tsh}</td>
-      <td style="${isHbLow ? 'color: var(--danger); font-weight: 700;' : ''}">${hb}</td>
+      <td style="${isHba1cHigh ? 'color: var(--crimson); font-weight: 700;' : ''}">${hba1c}</td>
+      <td style="${isCholHigh ? 'color: var(--amber); font-weight: 700;' : ''}">${chol}</td>
+      <td style="${isTgHigh ? 'color: var(--crimson); font-weight: 700;' : ''}">${tg}</td>
+      <td style="${isAltHigh ? 'color: var(--amber); font-weight: 700;' : ''}">${alt}</td>
+      <td style="${isCreatHigh ? 'color: var(--crimson); font-weight: 700;' : ''}">${creat}</td>
+      <td style="${isTshHigh ? 'color: var(--amber); font-weight: 700;' : ''}">${tsh}</td>
+      <td style="${isHbLow ? 'color: var(--crimson); font-weight: 700;' : ''}">${hb}</td>
       <td>
-        <span class="finding-badge ${p.abnormal_count > 3 ? 'badge-danger' : (p.abnormal_count > 0 ? 'badge-warning' : 'badge-success')}">
-          ${p.abnormal_count} abnormal
+        <span class="badge ${p.abnormal_count > 3 ? 'badge-red' : (p.abnormal_count > 0 ? 'badge-amber' : 'badge-green')}">
+          ${p.abnormal_count} flags
         </span>
       </td>
       <td>
-        <button class="view-btn" onclick="openPatientModal(${p.id})">View Panel</button>
+        <button class="inspect-btn" onclick="openPatientModal(${p.id})">View Dossier</button>
       </td>
     `;
     tbody.appendChild(tr);
   });
 }
 
-// Modal Inspector
+// Modal Dossier Handling
 function initModal() {
   const modal = document.getElementById('patient-modal');
   const closeBtn = document.getElementById('modal-close-btn');
 
-  closeBtn.addEventListener('click', () => {
-    modal.classList.remove('open');
-  });
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
       modal.classList.remove('open');
-    }
-  });
+    });
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('open');
+      }
+    });
+  }
 }
 
 function openPatientModal(patientId) {
   const patient = HEALTH_DATA.find(p => p.id === patientId);
   if (!patient) return;
 
-  document.getElementById('modal-patient-name').textContent = patient.name || 'Anonymous';
-  document.getElementById('modal-order-id').textContent = `Order ID: ${patient.order_id}`;
-  document.getElementById('modal-age-gender').textContent = `${patient.age || 'N/A'} Yrs / ${patient.gender}`;
+  document.getElementById('modal-patient-name').textContent = `${patient.name} &bull; Clinical Diagnostic Dossier`;
+  document.getElementById('modal-order-id').textContent = `Order Identifier: ${patient.order_id}`;
+  document.getElementById('modal-age-gender').textContent = `${patient.age || 'N/A'} Yrs &bull; ${patient.gender}`;
   document.getElementById('modal-barcode').textContent = patient.barcode || 'N/A';
   document.getElementById('modal-collected').textContent = patient.collected_on || patient.camp_date;
-  
-  const linkEl = document.getElementById('modal-report-link');
-  if (linkEl) {
-    linkEl.href = patient.report_link;
-  }
 
   const container = document.getElementById('modal-tests-container');
   container.innerHTML = '';
@@ -327,21 +333,16 @@ function openPatientModal(patientId) {
     if (!testVal) continue;
     const isAbnormal = abnormalMap[testName];
     const row = document.createElement('div');
-    row.className = `modal-test-row ${isAbnormal ? 'is-abnormal' : ''}`;
+    row.className = `dossier-row ${isAbnormal ? 'abnormal' : ''}`;
     row.innerHTML = `
       <div>
         <strong>${testName}</strong>
-        ${isAbnormal ? `<span style="font-size: 0.75rem; margin-left: 6px;">(${isAbnormal.status} &bull; Ref: ${isAbnormal.ref})</span>` : ''}
+        ${isAbnormal ? `<span style="font-size: 0.72rem; margin-left: 6px;">[${isAbnormal.status} &bull; Bio Ref: ${isAbnormal.ref}]</span>` : ''}
       </div>
-      <div>${testVal}</div>
+      <div style="font-family: var(--font-mono);">${testVal}</div>
     `;
     container.appendChild(row);
   }
 
   document.getElementById('patient-modal').classList.add('open');
-}
-
-function escapeHtml(str) {
-  if (!str) return '';
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
