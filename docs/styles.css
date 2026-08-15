@@ -1,6 +1,6 @@
 /* ==========================================================================
    CLINICAL RESEARCH MONOGRAPH & MEDICAL INTELLIGENCE DASHBOARD
-   Design System: Academic Editorial & Mobile-First Touch Optimization
+   Design System: Continuous Academic Editorial Monograph & Touch Optimization
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -58,7 +58,7 @@
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
-  --radius-xl: 20px;
+  --radius-xl: 24px;
 }
 
 /* Reset */
@@ -69,24 +69,28 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-app);
   color: var(--text-primary);
-  line-height: 1.65;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  padding-bottom: env(safe-area-inset-bottom, 20px);
+  padding-bottom: env(safe-area-inset-bottom, 24px);
 }
 
-/* Journal Masthead Header */
+/* Masthead Header */
 .journal-masthead {
   background: var(--navy-deep);
   color: #ffffff;
   padding: 8px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 0.72rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -113,13 +117,19 @@ body {
 .hero-wrapper {
   background: linear-gradient(180deg, #ffffff 0%, var(--bg-app) 100%);
   border-bottom: 1px solid var(--border-light);
-  padding: 24px 0 20px;
+  padding: 32px 0 24px;
 }
 
 .hero-container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 16px;
+}
+
+@media (min-width: 768px) {
+  .hero-container {
+    padding: 0 24px;
+  }
 }
 
 .hero-category-tag {
@@ -130,59 +140,59 @@ body {
   color: var(--navy-dark);
   font-size: 0.7rem;
   font-weight: 700;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 9999px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
 .hero-headline {
   font-family: var(--font-serif);
-  font-size: 1.75rem;
+  font-size: 1.85rem;
   font-weight: 800;
-  line-height: 1.25;
+  line-height: 1.22;
   color: var(--navy-deep);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   letter-spacing: -0.02em;
 }
 
 @media (min-width: 768px) {
   .hero-headline {
-    font-size: 2.5rem;
+    font-size: 2.65rem;
   }
 }
 
 .hero-summary-prose {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   color: var(--text-secondary);
-  max-width: 980px;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  max-width: 1000px;
+  line-height: 1.7;
+  margin-bottom: 24px;
 }
 
 @media (min-width: 768px) {
   .hero-summary-prose {
-    font-size: 1.1rem;
+    font-size: 1.12rem;
   }
 }
 
-/* Vital Metric Cards Grid (Mobile 2-column or 1-column) */
+/* Vital Metric Cards Grid */
 .vital-metrics-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 @media (min-width: 768px) {
   .vital-metrics-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
     gap: 16px;
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 380px) {
   .vital-metrics-grid {
     grid-template-columns: 1fr;
   }
@@ -201,7 +211,7 @@ body {
 @media (min-width: 768px) {
   .vital-card {
     border-radius: var(--radius-lg);
-    padding: 20px;
+    padding: 18px 20px;
   }
 }
 
@@ -252,7 +262,7 @@ body {
 
 .vital-value {
   font-family: var(--font-sans);
-  font-size: 1.6rem;
+  font-size: 1.65rem;
   font-weight: 800;
   line-height: 1.1;
   color: var(--navy-deep);
@@ -262,7 +272,7 @@ body {
 
 @media (min-width: 768px) {
   .vital-value {
-    font-size: 2.1rem;
+    font-size: 2.15rem;
   }
 }
 
@@ -270,14 +280,15 @@ body {
 .vital-card.card-warning .vital-value { color: var(--amber-warning); }
 
 .vital-description {
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   color: var(--text-secondary);
   line-height: 1.35;
 }
 
-/* Mobile Sticky Touch Nav Bar */
+/* Sticky Continuous Scroll Navigation Bar */
 .sticky-nav-bar {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border-light);
   position: sticky;
   top: 0;
@@ -293,33 +304,33 @@ body {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   gap: 4px;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
 }
 
 .nav-bar-container::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  display: none;
 }
 
 .nav-tab-btn {
   background: transparent;
   border: none;
-  padding: 12px 14px;
+  padding: 14px 16px;
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
   white-space: nowrap;
   border-bottom: 3px solid transparent;
   transition: all 0.15s ease;
-  min-height: 48px;
+  min-height: 50px;
   display: inline-flex;
   align-items: center;
-  touch-action: manipulation;
+  text-decoration: none;
 }
 
-.nav-tab-btn:active {
-  background: var(--bg-subtle);
+.nav-tab-btn:hover {
+  color: var(--navy-deep);
 }
 
 .nav-tab-btn.active {
@@ -328,95 +339,108 @@ body {
   border-bottom-color: var(--cyan-vibrant);
 }
 
-/* Main Layout */
+/* Main Layout for Continuous Scroll */
 .main-layout {
   max-width: 1280px;
-  margin: 20px auto 60px;
-  padding: 0 14px;
+  margin: 24px auto 80px;
+  padding: 0 16px;
 }
 
 @media (min-width: 768px) {
   .main-layout {
-    margin: 36px auto 80px;
+    margin: 40px auto 100px;
     padding: 0 24px;
   }
 }
 
-/* Chapter Sections */
+/* All Chapters Visible in Continuous Flow */
 .chapter-content-panel {
-  display: none;
-}
-
-.chapter-content-panel.active {
   display: block;
-  animation: slideFadeIn 0.2s ease-out;
+  margin-bottom: 48px;
+  scroll-margin-top: 70px;
 }
 
-@keyframes slideFadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+@media (min-width: 768px) {
+  .chapter-content-panel {
+    margin-bottom: 64px;
+    scroll-margin-top: 80px;
+  }
 }
 
 .editorial-card {
   background: #ffffff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  padding: 20px 16px;
-  margin-bottom: 24px;
+  padding: 24px 18px;
   box-shadow: var(--shadow-card);
+  position: relative;
 }
 
 @media (min-width: 768px) {
   .editorial-card {
-    padding: 36px 40px;
+    padding: 44px 48px;
     border-radius: var(--radius-xl);
-    margin-bottom: 36px;
   }
 }
 
 .chapter-eyebrow {
   font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--cyan-vibrant);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .chapter-heading {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: var(--navy-deep);
-  line-height: 1.3;
-  margin-bottom: 18px;
+  line-height: 1.25;
+  margin-bottom: 22px;
   letter-spacing: -0.02em;
 }
 
 @media (min-width: 768px) {
   .chapter-heading {
-    font-size: 2.1rem;
-    margin-bottom: 24px;
+    font-size: 2.25rem;
+    margin-bottom: 28px;
   }
 }
 
-/* Prose Typography */
+/* Enhanced Literary Prose Typography */
 .editorial-prose {
-  font-size: 0.95rem;
-  line-height: 1.75;
+  font-size: 0.98rem;
+  line-height: 1.85;
   color: var(--text-secondary);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 @media (min-width: 768px) {
   .editorial-prose {
-    font-size: 1.05rem;
-    line-height: 1.85;
+    font-size: 1.08rem;
+    line-height: 1.95;
   }
 }
 
 .editorial-prose p {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.editorial-prose h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--navy-deep);
+  margin: 32px 0 14px;
+  line-height: 1.35;
+}
+
+@media (min-width: 768px) {
+  .editorial-prose h3 {
+    font-size: 1.5rem;
+    margin: 40px 0 16px;
+  }
 }
 
 .editorial-prose strong {
@@ -424,21 +448,35 @@ body {
   font-weight: 700;
 }
 
-/* Educational Primer Box */
+.editorial-prose em {
+  color: var(--navy-dark);
+}
+
+.editorial-prose ul, .editorial-prose ol {
+  padding-left: 24px;
+  margin-bottom: 22px;
+}
+
+.editorial-prose li {
+  margin-bottom: 12px;
+}
+
+/* Physiology Primer Box */
 .primer-card {
   background: linear-gradient(135deg, #f0f7fc 0%, #e8f4fa 100%);
   border: 1px solid #c8e1f0;
-  border-left: 5px solid var(--cyan-vibrant);
+  border-left: 6px solid var(--cyan-vibrant);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  padding: 18px 14px;
-  margin: 24px 0;
+  padding: 20px 16px;
+  margin: 28px 0;
   box-shadow: var(--shadow-sm);
 }
 
 @media (min-width: 768px) {
   .primer-card {
-    padding: 24px 28px;
+    padding: 28px 32px;
     border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    margin: 36px 0;
   }
 }
 
@@ -449,162 +487,192 @@ body {
   font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--navy-dark);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+}
+
+.primer-intro {
+  font-size: 0.95rem;
+  color: var(--navy-deep);
+  line-height: 1.65;
+  margin-bottom: 18px;
 }
 
 .primer-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
-  margin-top: 14px;
+  gap: 14px;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 680px) {
   .primer-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 18px;
   }
 }
 
 .primer-item {
   background: #ffffff;
   border: 1px solid rgba(2, 132, 199, 0.15);
-  border-radius: var(--radius-sm);
-  padding: 14px;
+  border-radius: var(--radius-md);
+  padding: 16px;
 }
 
 .primer-item-title {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--navy-deep);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
   gap: 4px;
 }
 
 .primer-item-ref {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   color: var(--cyan-vibrant);
+  font-weight: 600;
 }
 
 .primer-item-body {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: var(--text-secondary);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 /* Discovery Callouts */
 .discovery-callout {
   border-radius: var(--radius-md);
-  padding: 18px 16px;
-  margin: 20px 0;
+  padding: 20px 18px;
+  margin: 28px 0;
   border: 1px solid transparent;
+}
+
+@media (min-width: 768px) {
+  .discovery-callout {
+    padding: 24px 28px;
+    border-radius: var(--radius-lg);
+  }
 }
 
 .discovery-callout.alert-crimson {
   background: var(--crimson-subtle);
   border-color: #fecdd3;
-  border-left: 5px solid var(--crimson-alert);
+  border-left: 6px solid var(--crimson-alert);
 }
 
 .discovery-callout.alert-amber {
   background: var(--amber-subtle);
   border-color: #fde68a;
-  border-left: 5px solid var(--amber-warning);
+  border-left: 6px solid var(--amber-warning);
+}
+
+.discovery-callout.alert-emerald {
+  background: var(--emerald-subtle);
+  border-color: #a7f3d0;
+  border-left: 6px solid var(--emerald-normal);
 }
 
 .callout-header {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
 }
 
 .alert-crimson .callout-header { color: var(--crimson-text); }
 .alert-amber .callout-header { color: var(--amber-text); }
+.alert-emerald .callout-header { color: var(--emerald-text); }
 
 .callout-body {
-  font-size: 0.85rem;
-  line-height: 1.6;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+@media (min-width: 768px) {
+  .callout-body {
+    font-size: 0.94rem;
+  }
 }
 
 .alert-crimson .callout-body { color: #881337; }
 .alert-amber .callout-body { color: #78350f; }
+.alert-emerald .callout-body { color: #064e3b; }
 
-/* Visual Chart Cards */
+/* Visual Chart Presentation Cards */
 .chart-presentation-card {
   background: var(--bg-surface);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  padding: 16px;
-  margin: 24px 0;
+  padding: 18px 14px;
+  margin: 28px 0;
   box-shadow: var(--shadow-sm);
 }
 
 @media (min-width: 768px) {
   .chart-presentation-card {
     border-radius: var(--radius-lg);
-    padding: 24px;
+    padding: 26px;
+    margin: 36px 0;
   }
 }
 
 .chart-meta-head {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .chart-title-main {
   font-family: var(--font-sans);
-  font-size: 0.98rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--navy-deep);
 }
 
 .chart-subtitle-main {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
 }
 
 .canvas-wrapper {
   position: relative;
-  height: 240px;
+  height: 250px;
   width: 100%;
 }
 
 @media (min-width: 768px) {
   .canvas-wrapper {
-    height: 280px;
+    height: 300px;
   }
 }
 
-/* Responsive Table Wrapper */
+/* Responsive Table Styles */
 .table-responsive-box {
   background: #ffffff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-sm);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  margin: 20px 0;
+  margin: 24px 0;
 }
 
 .clinical-matrix-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   text-align: left;
 }
 
 .clinical-matrix-table th {
   background: var(--bg-subtle);
-  padding: 12px 14px;
+  padding: 14px 16px;
   font-weight: 700;
   color: var(--navy-deep);
   border-bottom: 1px solid var(--border-light);
@@ -612,19 +680,19 @@ body {
 }
 
 .clinical-matrix-table td {
-  padding: 10px 14px;
+  padding: 12px 16px;
   border-bottom: 1px solid var(--border-light);
   color: var(--text-secondary);
 }
 
-/* Interactive Cohort Explorer Controls */
+/* Interactive Cohort Explorer */
 .explorer-search-bar {
   display: flex;
   gap: 10px;
   flex-direction: column;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   background: var(--bg-subtle);
-  padding: 14px;
+  padding: 16px;
   border-radius: var(--radius-md);
 }
 
@@ -638,14 +706,14 @@ body {
 
 .search-text-input {
   width: 100%;
-  padding: 10px 14px;
+  padding: 12px 16px;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   outline: none;
   background: #ffffff;
-  min-height: 42px;
+  min-height: 44px;
 }
 
 .search-text-input:focus {
@@ -655,20 +723,20 @@ body {
 
 .dropdown-filter {
   flex: 1;
-  padding: 10px 12px;
+  padding: 10px 14px;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   background: #ffffff;
   cursor: pointer;
-  min-height: 42px;
+  min-height: 44px;
 }
 
 .cohort-data-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
 }
 
 .cohort-data-table th {
@@ -680,7 +748,7 @@ body {
 }
 
 .cohort-data-table td {
-  padding: 10px 14px;
+  padding: 11px 14px;
   border-bottom: 1px solid var(--border-light);
   white-space: nowrap;
 }
@@ -693,14 +761,13 @@ body {
   background: var(--navy-light);
   color: var(--navy-deep);
   border: none;
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: var(--radius-sm);
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   cursor: pointer;
   transition: all 0.15s;
-  min-height: 34px;
-  touch-action: manipulation;
+  min-height: 36px;
 }
 
 .dossier-btn:hover, .dossier-btn:active {
@@ -708,7 +775,7 @@ body {
   color: #ffffff;
 }
 
-/* Mobile-Friendly Fullscreen Modal Dossier */
+/* Modal Dossier Bottom-Sheet & Window */
 .dossier-modal-backdrop {
   display: none;
   position: fixed;
@@ -738,7 +805,7 @@ body {
 .dossier-modal-window {
   background: #ffffff;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  max-width: 800px;
+  max-width: 820px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
@@ -767,12 +834,12 @@ body {
 }
 
 .dossier-modal-body {
-  padding: 18px 16px;
+  padding: 20px 16px;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .dossier-modal-body {
-    padding: 24px 28px;
+    padding: 28px;
   }
 }
 
@@ -790,9 +857,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
+  padding: 9px 12px;
   border-bottom: 1px solid var(--border-light);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   gap: 6px;
 }
 

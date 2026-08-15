@@ -1,5 +1,6 @@
 // ==========================================================================
 // CLINICAL MEDICAL RESEARCH MONOGRAPH & COHORT EXPLORER JAVASCRIPT
+// Continuous Scroll & IntersectionObserver ScrollSpy
 // ==========================================================================
 
 let currentPage = 1;
@@ -7,31 +8,67 @@ const pageSize = 25;
 let filteredPatients = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-  initNavigation();
+  initScrollSpy();
   initCharts();
   initExplorer();
   initModal();
 });
 
-// Navigation Handling
-function initNavigation() {
-  const navBtns = document.querySelectorAll('.nav-tab-btn');
-  const panels = document.querySelectorAll('.chapter-content-panel');
+// Smooth Continuous Navigation & ScrollSpy
+function initScrollSpy() {
+  const navLinks = document.querySelectorAll('.nav-tab-btn');
+  const sections = document.querySelectorAll('.chapter-content-panel');
 
-  navBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-target');
-      
-      navBtns.forEach(b => b.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
+  // Click handler for smooth scrolling
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('data-target');
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        const offset = 80;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = targetEl.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
 
-      btn.classList.add('active');
-      const targetPanel = document.getElementById(targetId);
-      if (targetPanel) {
-        targetPanel.classList.add('active');
-        window.scrollTo({ top: targetPanel.offsetTop - 120, behavior: 'smooth' });
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
       }
     });
+  });
+
+  // IntersectionObserver for continuous scrollspy
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -60% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          if (link.getAttribute('data-target') === id) {
+            link.classList.add('active');
+            // Auto scroll nav tab into view if needed
+            link.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => {
+    observer.observe(section);
   });
 }
 
@@ -39,7 +76,6 @@ function initNavigation() {
 function initCharts() {
   if (typeof Chart === 'undefined') return;
 
-  // Chart defaults for clean academic aesthetic
   Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
   Chart.defaults.color = '#64748b';
 
