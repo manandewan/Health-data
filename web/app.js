@@ -1,4 +1,6 @@
-// Literary Clinical Medical Research Portal JavaScript Logic
+// ==========================================================================
+// CLINICAL MEDICAL RESEARCH MONOGRAPH & COHORT EXPLORER JAVASCRIPT
+// ==========================================================================
 
 let currentPage = 1;
 const pageSize = 25;
@@ -13,69 +15,91 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Navigation Handling
 function initNavigation() {
-  const navBtns = document.querySelectorAll('.nav-item-btn');
-  const sections = document.querySelectorAll('.chapter-section');
+  const navBtns = document.querySelectorAll('.nav-tab-btn');
+  const panels = document.querySelectorAll('.chapter-content-panel');
 
   navBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-target');
       
       navBtns.forEach(b => b.classList.remove('active'));
-      sections.forEach(s => s.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
 
       btn.classList.add('active');
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) {
-        targetSection.classList.add('active');
-        window.scrollTo({ top: targetSection.offsetTop - 100, behavior: 'smooth' });
+      const targetPanel = document.getElementById(targetId);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+        window.scrollTo({ top: targetPanel.offsetTop - 120, behavior: 'smooth' });
       }
     });
   });
 }
 
-// Chart Initializations
+// Chart Initializations using Chart.js
 function initCharts() {
   if (typeof Chart === 'undefined') return;
 
-  // 1. Age Distribution Chart
+  // Chart defaults for clean academic aesthetic
+  Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+  Chart.defaults.color = '#64748b';
+
+  // 1. Age Distribution Pyramid Chart
   const ctxAge = document.getElementById('chart-age')?.getContext('2d');
   if (ctxAge) {
     new Chart(ctxAge, {
       type: 'bar',
       data: {
-        labels: ['< 20 yrs', '20 - 29 yrs', '30 - 39 yrs', '40 - 49 yrs', '50+ yrs'],
+        labels: ['< 20 Yrs (Young Adults)', '20 - 29 Yrs (Core Workforce)', '30 - 39 Yrs', '40 - 49 Yrs', '50+ Yrs (Senior Staff)'],
         datasets: [{
           label: 'Number of Screened Employees',
           data: [24, 175, 61, 17, 9],
-          backgroundColor: '#0f2d59',
-          borderRadius: 4,
+          backgroundColor: '#0f2b52',
+          hoverBackgroundColor: '#0284c7',
+          borderRadius: 6,
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { display: false }
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#071527',
+            padding: 12,
+            cornerRadius: 8,
+            titleFont: { weight: 'bold' }
+          }
         },
         scales: {
-          y: { beginAtZero: true, grid: { color: '#f1f5f9' }, title: { display: true, text: 'Subject Count' } },
-          x: { grid: { display: false } }
+          y: { 
+            beginAtZero: true, 
+            grid: { color: '#f1f5f9' },
+            title: { display: true, text: 'Subject Count (Total N=286)', color: '#475569', font: { weight: '600' } }
+          },
+          x: { 
+            grid: { display: false }
+          }
         }
       }
     });
   }
 
-  // 2. Lipid Profiles Chart
+  // 2. Lipid Risk Profiles Doughnut Chart
   const ctxLipid = document.getElementById('chart-lipid')?.getContext('2d');
   if (ctxLipid) {
     new Chart(ctxLipid, {
       type: 'doughnut',
       data: {
-        labels: ['Normal Lipids (33.5%)', 'Isolated Low HDL (22.2%)', 'Isolated High TG (20.1%)', 'Both High TG + Low HDL (20.0%)'],
+        labels: [
+          'Optimal / Normal Lipids (33.5%)',
+          'Isolated Low Protective HDL (<40 mg/dL) (22.2%)',
+          'Isolated High Triglycerides (>150 mg/dL) (20.1%)',
+          'Both High TG + Low HDL (Atherogenic Triad) (20.0%)'
+        ],
         datasets: [{
           data: [95, 63, 57, 57],
-          backgroundColor: ['#047857', '#b45309', '#ea580c', '#be123c'],
-          borderWidth: 2,
+          backgroundColor: ['#059669', '#d97706', '#ea580c', '#e11d48'],
+          borderWidth: 3,
           borderColor: '#ffffff'
         }]
       },
@@ -83,31 +107,39 @@ function initCharts() {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { position: 'bottom', labels: { boxWidth: 12, padding: 14 } }
+          legend: { 
+            position: 'bottom', 
+            labels: { boxWidth: 14, padding: 14, font: { size: 12, weight: '500' } } 
+          },
+          tooltip: {
+            backgroundColor: '#071527',
+            padding: 12,
+            cornerRadius: 8
+          }
         }
       }
     });
   }
 
-  // 3. Anemia by Gender Chart
+  // 3. Anemia Prevalence by Gender Stacked Bar Chart
   const ctxAnemia = document.getElementById('chart-anemia')?.getContext('2d');
   if (ctxAnemia) {
     new Chart(ctxAnemia, {
       type: 'bar',
       data: {
-        labels: ['Female Cohort (N = 41)', 'Male Cohort (N = 245)'],
+        labels: ['Female Workforce (N = 41)', 'Male Workforce (N = 245)'],
         datasets: [
           {
-            label: 'Normal Hemoglobin',
+            label: 'Normal Hemoglobin (Healthy Oxygen Capacity)',
             data: [8, 211],
-            backgroundColor: '#047857',
-            borderRadius: 4
+            backgroundColor: '#059669',
+            borderRadius: 6
           },
           {
-            label: 'Anemic (Hb < Reference Threshold)',
+            label: 'Anemic (Microcytic / Low Hemoglobin Deficit)',
             data: [33, 34],
-            backgroundColor: '#be123c',
-            borderRadius: 4
+            backgroundColor: '#e11d48',
+            borderRadius: 6
           }
         ]
       },
@@ -116,47 +148,70 @@ function initCharts() {
         maintainAspectRatio: false,
         scales: {
           x: { stacked: true, grid: { display: false } },
-          y: { stacked: true, beginAtZero: true, grid: { color: '#f1f5f9' }, title: { display: true, text: 'Number of Individuals' } }
+          y: { 
+            stacked: true, 
+            beginAtZero: true, 
+            grid: { color: '#f1f5f9' },
+            title: { display: true, text: 'Number of Workforce Participants', color: '#475569', font: { weight: '600' } }
+          }
         },
         plugins: {
-          legend: { position: 'bottom', labels: { boxWidth: 12 } }
+          legend: { position: 'bottom', labels: { boxWidth: 14, padding: 14 } },
+          tooltip: {
+            backgroundColor: '#071527',
+            padding: 12,
+            cornerRadius: 8
+          }
         }
       }
     });
   }
 
-  // 4. Organ Risk Matrix Chart
+  // 4. Organ Risk Matrix Polar Area Chart
   const ctxOrgan = document.getElementById('chart-organ')?.getContext('2d');
   if (ctxOrgan) {
     new Chart(ctxOrgan, {
       type: 'polarArea',
       data: {
-        labels: ['Lipid Dysregulation (48.9%)', 'ESR Inflammation (28.1%)', 'Elevated ALT / Liver (25.3%)', 'Anemia (23.8%)', 'Elevated TSH (8.1%)', 'Elevated Creatinine (1.4%)'],
+        labels: [
+          'Lipid Dysregulation (48.9%)',
+          'ESR Inflammatory Spike (28.1%)',
+          'Hepatic ALT Elevation (25.3%)',
+          'Nutritional Anemia (23.8%)',
+          'Thyroid TSH Elevation (8.1%)',
+          'Renal Creatinine Elevation (1.4%)'
+        ],
         datasets: [{
           data: [48.9, 28.1, 25.3, 23.8, 8.1, 1.4],
           backgroundColor: [
-            'rgba(180, 83, 9, 0.75)',
-            'rgba(190, 18, 60, 0.75)',
-            'rgba(8, 127, 140, 0.75)',
-            'rgba(225, 29, 72, 0.75)',
-            'rgba(100, 116, 139, 0.75)',
-            'rgba(15, 45, 89, 0.75)'
+            'rgba(217, 119, 6, 0.8)',
+            'rgba(225, 29, 72, 0.8)',
+            'rgba(2, 132, 199, 0.8)',
+            'rgba(244, 63, 94, 0.8)',
+            'rgba(100, 116, 139, 0.8)',
+            'rgba(15, 43, 82, 0.8)'
           ],
-          borderWidth: 1
+          borderWidth: 1,
+          borderColor: '#ffffff'
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8 } }
+          legend: { position: 'bottom', labels: { boxWidth: 12, padding: 10 } },
+          tooltip: {
+            backgroundColor: '#071527',
+            padding: 12,
+            cornerRadius: 8
+          }
         }
       }
     });
   }
 }
 
-// Cohort Explorer
+// Cohort Explorer, Search, Filtering & Pagination
 function initExplorer() {
   if (typeof HEALTH_DATA === 'undefined') return;
 
@@ -169,9 +224,9 @@ function initExplorer() {
   const nextBtn = document.getElementById('btn-next-page');
 
   function applyFilters() {
-    const query = searchInput.value.toLowerCase().trim();
-    const gender = genderFilter.value;
-    const risk = riskFilter.value;
+    const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    const gender = genderFilter ? genderFilter.value : 'all';
+    const risk = riskFilter ? riskFilter.value : 'all';
 
     filteredPatients = HEALTH_DATA.filter(p => {
       const matchSearch = !query || 
@@ -222,7 +277,6 @@ function renderTable() {
   const nextBtn = document.getElementById('btn-next-page');
 
   if (!tbody) return;
-
   tbody.innerHTML = '';
 
   const total = filteredPatients.length;
@@ -267,31 +321,31 @@ function renderTable() {
 
     tr.innerHTML = `
       <td>${p.id}</td>
-      <td style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--navy-primary);">${p.order_id}</td>
+      <td style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--navy-deep); font-weight: 600;">${p.order_id}</td>
       <td><strong>${p.name}</strong></td>
       <td>${p.age || '-'}</td>
       <td>${p.gender}</td>
-      <td style="${isHba1cHigh ? 'color: var(--crimson); font-weight: 700;' : ''}">${hba1c}</td>
-      <td style="${isCholHigh ? 'color: var(--amber); font-weight: 700;' : ''}">${chol}</td>
-      <td style="${isTgHigh ? 'color: var(--crimson); font-weight: 700;' : ''}">${tg}</td>
-      <td style="${isAltHigh ? 'color: var(--amber); font-weight: 700;' : ''}">${alt}</td>
-      <td style="${isCreatHigh ? 'color: var(--crimson); font-weight: 700;' : ''}">${creat}</td>
-      <td style="${isTshHigh ? 'color: var(--amber); font-weight: 700;' : ''}">${tsh}</td>
-      <td style="${isHbLow ? 'color: var(--crimson); font-weight: 700;' : ''}">${hb}</td>
+      <td style="${isHba1cHigh ? 'color: var(--crimson-alert); font-weight: 700;' : ''}">${hba1c}</td>
+      <td style="${isCholHigh ? 'color: var(--amber-warning); font-weight: 700;' : ''}">${chol}</td>
+      <td style="${isTgHigh ? 'color: var(--crimson-alert); font-weight: 700;' : ''}">${tg}</td>
+      <td style="${isAltHigh ? 'color: var(--amber-warning); font-weight: 700;' : ''}">${alt}</td>
+      <td style="${isCreatHigh ? 'color: var(--crimson-alert); font-weight: 700;' : ''}">${creat}</td>
+      <td style="${isTshHigh ? 'color: var(--amber-warning); font-weight: 700;' : ''}">${tsh}</td>
+      <td style="${isHbLow ? 'color: var(--crimson-alert); font-weight: 700;' : ''}">${hb}</td>
       <td>
-        <span class="badge ${p.abnormal_count > 3 ? 'badge-red' : (p.abnormal_count > 0 ? 'badge-amber' : 'badge-green')}">
-          ${p.abnormal_count} flags
+        <span class="vital-badge ${p.abnormal_count > 3 ? 'badge-alert' : (p.abnormal_count > 0 ? 'badge-caution' : 'badge-optimal')}">
+          ${p.abnormal_count} abnormal
         </span>
       </td>
       <td>
-        <button class="inspect-btn" onclick="openPatientModal(${p.id})">View Dossier</button>
+        <button class="dossier-btn" onclick="openPatientModal(${p.id})">Inspect Dossier</button>
       </td>
     `;
     tbody.appendChild(tr);
   });
 }
 
-// Modal Dossier Handling
+// Modal Dossier Window Handling
 function initModal() {
   const modal = document.getElementById('patient-modal');
   const closeBtn = document.getElementById('modal-close-btn');
@@ -315,7 +369,7 @@ function openPatientModal(patientId) {
   const patient = HEALTH_DATA.find(p => p.id === patientId);
   if (!patient) return;
 
-  document.getElementById('modal-patient-name').textContent = `${patient.name} &bull; Clinical Diagnostic Dossier`;
+  document.getElementById('modal-patient-name').textContent = `${patient.name} &bull; Diagnostic Biomarker Dossier`;
   document.getElementById('modal-order-id').textContent = `Order Identifier: ${patient.order_id}`;
   document.getElementById('modal-age-gender').textContent = `${patient.age || 'N/A'} Yrs &bull; ${patient.gender}`;
   document.getElementById('modal-barcode').textContent = patient.barcode || 'N/A';
@@ -333,13 +387,13 @@ function openPatientModal(patientId) {
     if (!testVal) continue;
     const isAbnormal = abnormalMap[testName];
     const row = document.createElement('div');
-    row.className = `dossier-row ${isAbnormal ? 'abnormal' : ''}`;
+    row.className = `dossier-item-row ${isAbnormal ? 'is-flagged' : ''}`;
     row.innerHTML = `
       <div>
         <strong>${testName}</strong>
-        ${isAbnormal ? `<span style="font-size: 0.72rem; margin-left: 6px;">[${isAbnormal.status} &bull; Bio Ref: ${isAbnormal.ref}]</span>` : ''}
+        ${isAbnormal ? `<span style="font-size: 0.72rem; margin-left: 6px;">[${isAbnormal.status} &bull; Ref: ${isAbnormal.ref}]</span>` : ''}
       </div>
-      <div style="font-family: var(--font-mono);">${testVal}</div>
+      <div style="font-family: var(--font-mono); font-size: 0.85rem;">${testVal}</div>
     `;
     container.appendChild(row);
   }
